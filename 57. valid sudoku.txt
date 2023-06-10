@@ -1,0 +1,38 @@
+bool check(int matrix[9][9], int num, int i, int j) {
+    for(int k = 0; k < 9; k++) {
+        if(matrix[i][k] == num || matrix[k][j] == num){
+            return false;
+        }
+    }
+
+    int si = i - i % 3;
+    int sj = j - j % 3;
+
+    for(int i = si; i < si + 3; i++){
+        for(int j = sj; j < sj + 3; j++){
+            if(matrix[i][j] == num) return false;
+        }
+    }
+
+    return true;
+}
+
+bool solve(int board[9][9], int i, int j){
+    if(i == 9) return true;
+    if(j == 9) return solve(board, i + 1, 0);
+    if(board[i][j] != 0) return solve(board, i, j + 1);
+
+    for(int c = 1; c <= 9; c++){
+        if(check(board, c, i, j)){
+            board[i][j] = c;
+            if(solve(board, i, j + 1)) return true;
+            board[i][j] = 0;
+        }
+    }
+
+    return false;
+}
+
+bool isItSudoku(int matrix[9][9]) {
+    return solve(matrix, 0, 0);
+}

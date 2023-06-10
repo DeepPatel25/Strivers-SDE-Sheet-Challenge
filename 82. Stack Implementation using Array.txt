@@ -1,0 +1,39 @@
+#include <bits/stdc++.h> 
+// Stack class.
+class Stack {
+    
+public:
+    vector<int> vi;
+    int pointer;
+    
+    Stack(int capacity) {
+        vi.resize(capacity);
+        pointer = 0;
+    }
+
+    void push(int num) {
+        if(pointer == vi.size()) return;
+        vi[pointer++] = num;
+    }
+
+    int pop() {
+        if(pointer == 0) return -1;
+        int val = vi[pointer - 1];
+        pointer--;
+        return val;
+    }
+    
+    int top() {
+        if(pointer == 0) return -1;
+        return vi[pointer - 1];
+    }
+    
+    int isEmpty() {
+        return pointer == 0;
+    }
+    
+    int isFull() {
+        return pointer == vi.size();
+    }
+    
+};

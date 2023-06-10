@@ -1,0 +1,33 @@
+#include <bits/stdc++.h> 
+/*************************************************************
+ 
+    Following is the Binary Tree node structure
+
+    class BinaryTreeNode 
+    {
+    public : 
+        T data;
+        BinaryTreeNode<T> *left;
+        BinaryTreeNode<T> *right;
+
+        BinaryTreeNode(T data) {
+            this -> data = data;
+            left = NULL;
+            right = NULL;
+        }
+    };
+
+*************************************************************/
+int heightBt(BinaryTreeNode<int>* root) {
+    if(root == NULL) return 0;
+    return 1 + max(heightBt(root->left), heightBt(root->right));
+}
+
+bool isBalancedBT(BinaryTreeNode<int>* root) {
+    if(!root) return true;
+    int h1 = heightBt(root->left);
+    int h2 = heightBt(root->right);
+
+    if(abs(h2 - h1) > 1) return false;
+    return (isBalancedBT(root->left) && isBalancedBT(root->right));
+}

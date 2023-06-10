@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+
+vector<long long int> addRow(int num){
+  long long int ans = 1;
+  vector<long long int> temp;
+  temp.emplace_back(1);
+
+  for(int i = 1; i < num; i++){
+    ans = ans * (num - i);
+    ans = ans / (i);
+    temp.push_back(ans);
+  }
+
+  return temp;
+}
+
+vector<vector<long long int>> printPascal(int n) 
+{
+  vector<vector<long long int>> ans;
+
+  for(int i = 1; i <= n; i++)
+    ans.push_back(addRow(i));
+  
+  return ans;
+}

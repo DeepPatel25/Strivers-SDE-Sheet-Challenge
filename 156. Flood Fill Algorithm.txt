@@ -1,0 +1,26 @@
+void solver(vector<vector<int>> &image, int x, int y, int oldColor, int newColor) {
+    vector<int> dx = {0, 1, 0, -1};
+    vector<int> dy = {1, 0, -1, 0};
+
+    for(int i = 0; i < 4; i++){
+        int newX = x + dx[i];
+        int newY = y + dy[i];
+
+        if(newX >= 0 && newY >= 0 && newX < image.size() && newY < image[0].size() 
+        && image[newX][newY] == oldColor) {
+            image[newX][newY] = newColor;
+            solver(image, newX, newY, oldColor, newColor);
+        }
+    }
+}
+
+vector<vector<int>> floodFill(vector<vector<int>> &image, int x, int y, int newColor)
+{
+    int temp = image[x][y];
+
+    if(temp == newColor) return image;
+
+    image[x][y] = newColor;
+    solver(image, x, y, temp, newColor);
+    return image; 
+}

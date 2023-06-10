@@ -1,0 +1,30 @@
+#include <bits/stdc++.h> 
+
+bool solver(int idx, int k, vector<int> &arr, vector<vector<int>> &dp){
+    if(k == 0) return true;
+    if(idx == 0) return arr[0] == k;
+
+    if(dp[idx][k] != -1){
+        if(dp[idx][k] == 0) return false;
+        return true;
+    }
+
+    bool notTake = solver(idx - 1, k, arr, dp);
+    bool take = false;
+
+    if (arr[idx] <= k) {
+      take = solver(idx - 1, k - arr[idx], arr, dp);
+    }
+
+    if(notTake || take) 
+        dp[idx][k] = 1;
+    else
+        dp[idx][k] = 0;
+
+    return notTake || take;
+}
+
+bool subsetSumToK(int n, int k, vector<int> &arr) {
+    vector<vector<int>> dp(n, vector<int> (k + 1, -1));
+    return solver(n - 1, k, arr, dp);
+}

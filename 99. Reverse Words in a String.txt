@@ -1,0 +1,4 @@
+def reverseString(str: str) -> str:
+    str = " ".join(str.split())
+    str = list(str.split(" "))
+    return " ".join(str[::-1])

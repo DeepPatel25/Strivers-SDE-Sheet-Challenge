@@ -1,0 +1,20 @@
+void helper(int idx, int sum, int target, vector<int> &arr, vector<int> &temp, vector<vector<int>> &ans) {
+    if(idx == arr.size()) {
+        if(sum == target)
+            ans.push_back(temp);
+        return;
+    }
+
+    temp.push_back(arr[idx]);
+    helper(idx + 1, sum + arr[idx], target, arr, temp, ans);
+    temp.pop_back();
+    helper(idx + 1, sum, target, arr, temp, ans);
+}
+
+vector<vector<int>> findSubsetsThatSumToK(vector<int> arr, int n, int k)
+{
+    vector<vector<int>> ans;
+    vector<int> temp;
+    helper(0, 0, k, arr, temp, ans);
+    return ans;
+}

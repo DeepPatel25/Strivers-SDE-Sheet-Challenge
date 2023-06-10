@@ -1,0 +1,55 @@
+#include <bits/stdc++.h> 
+/************************************************************
+
+    Following is the TreeNode class structure
+
+    template <typename T>
+    class TreeNode {
+       public:
+        T data;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+
+        TreeNode(T data) {
+            this->data = data;
+            left = NULL;
+            right = NULL;
+        }
+    };
+
+************************************************************/
+
+vector<int> getLeftView(TreeNode<int> *root)
+{
+    vector<vector<int>> ans; 
+        
+    if(root == NULL) return {}; 
+            
+    queue<TreeNode<int>*> q; 
+    q.push(root); 
+        
+    while(!q.empty()) {
+        int size = q.size();
+        vector<int> level;
+
+        for(int i = 0; i < size; i++) {
+            TreeNode<int> *temp = q.front(); 
+            q.pop(); 
+                
+            if(temp->left != NULL) 
+                q.push(temp->left); 
+            if(temp->right != NULL) 
+                q.push(temp->right); 
+                    
+            level.push_back(temp->data); 
+        }
+        ans.push_back(level);
+    }
+    
+    vector<int> temp;
+    for(auto it: ans){
+        temp.push_back(it[0]);
+    }
+
+    return temp;
+}

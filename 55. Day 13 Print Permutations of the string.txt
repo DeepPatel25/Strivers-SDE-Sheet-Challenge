@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+
+void solver(int idx, string &s, vector<string> &ans){
+    if(idx >= s.size()) {
+        ans.push_back(s);
+        return;
+    }
+
+    for(int i = idx; i < s.size(); i++){
+        swap(s[idx], s[i]);
+        solver(idx+1, s, ans);
+        swap(s[idx], s[i]);
+    }
+}
+
+vector<string> findPermutations(string &s) {
+    int idx = 0;
+    vector<string> ans;
+    solver(idx, s, ans);
+    return ans;
+}
